@@ -15,7 +15,7 @@
 ```
 
 ### Despliegue
-Haz click en [merqueo-app](https://infallible-carson-f008b1.netlify.app/#/) para obtener una vista previa de la app.
+Haz click en [merqueo-app](https://eloquent-fermi-f08441.netlify.app/#/) para obtener una vista previa de la app.
 
 ## Project setup
 ```
