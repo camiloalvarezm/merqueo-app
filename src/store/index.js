@@ -1,12 +1,37 @@
-import { createStore } from 'vuex'
+import {
+  createStore
+} from 'vuex'
+import axios from 'axios'
 
 export default createStore({
   state: {
+    productList: []
   },
   mutations: {
+    updateProductList(state, payload) {
+      state.productList = payload
+    }
   },
   actions: {
+    getProductList({
+      commit
+    }) {
+      axios
+        .get('https://run.mocky.io/v3/729fdd53-f365-49b4-bd55-f7e10bcc9a4b')
+        .then((response) => {
+          const { data } = response.data
+          console.log(data[1])
+          commit('updateProductList', data)
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   },
-  modules: {
-  }
+  getters: {
+    filterProducts({ productList }, payload) {
+      console.log(productList, payload)
+    }
+  },
+  modules: {}
 })

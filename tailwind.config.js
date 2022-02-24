@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         darkpink: '#D0006F',
-        lightpink: '#FFE0F0'
+        lightpink: '#FFE0F0',
+        darkgreen: '#41B883',
       }
     },
   },

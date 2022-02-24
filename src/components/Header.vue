@@ -19,12 +19,14 @@
           class="h-12 lg:h-14"
         />
       </div>
-      <div class="flex">
+      <div class="flex cursor-pointer">
         <div>
           <i class="fa-solid fa-cart-shopping text-3xl"></i>
         </div>
         <div class="-ml-2 -mt-2">
-          <h6 class="font-bold rounded-full bg-darkpink text-white px-2">2</h6>
+          <h6 class="font-bold rounded-full bg-darkpink text-white px-2">
+            {{ cartQuantity }}
+          </h6>
         </div>
       </div>
     </div>
@@ -34,6 +36,12 @@
 <script>
 export default {
   name: "Header",
+  props: {
+    cartQuantity: {
+      required: true,
+      type: Number
+    }
+  }
 };
 </script>
 

@@ -2,6 +2,13 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+ created() {
+   if (!localStorage.getItem('cartProductList')) localStorage.setItem('cartProductList', JSON.stringify([]))
+ } 
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
