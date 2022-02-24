@@ -14,6 +14,7 @@
             h-14
             mb-6
             text-lg
+            w-full
             lg:w-1/3
             lg:mb-0
           "
@@ -22,7 +23,7 @@
           <input type="text" placeholder="Buscar" />
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 my-6 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-6 gap-4">
         <Card />
         <Card />
         <Card />
