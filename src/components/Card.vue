@@ -10,7 +10,7 @@
     <div class="m-10 font-bold divide-y">
       <div class="flex flex-col gap-y-3 mb-3">
         <span class="text-xl">{{ productData.name }}</span>
-        <span class="text-lg">$ {{ productData.price }}</span>
+        <span class="text-lg">$ {{ price }}</span>
         <span class="font-normal text-sm">{{ productData.pum[0] }}</span>
       </div>
       <div class="flex flex-col gap-y-3 pt-3">
@@ -49,6 +49,7 @@
             +
           </button>
         </div>
+        <span class="font-normal text-sm">{{ productData.quantity }} unidades disp.</span>
         <button
           class="rounded bg-darkpink py-2 font-bold text-white"
           @click="showCartOrBuy"
@@ -106,6 +107,11 @@ export default {
       type: Number,
       required: true,
     },
+  },
+  computed: {
+    price() {
+      return this.productData.price * this.productQuantity
+    }
   },
   methods: {
     ...mapMutations(["updateCartQuantity", "updateTotalPrice"]),
