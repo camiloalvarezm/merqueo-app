@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Header :cartQuantity="cartQuantity" />
+  <div class="h-screen overflow-y-scroll">
+    <Header :cartQuantity="cartQuantity" @open-modal="toggleCartModal" />
     <div class="max-w-screen-xl mx-auto mt-6 px-6 md:px-12">
       <div
         class="
@@ -40,15 +40,20 @@
           :product-data="product.attributes"
           :product-id="Number(product.id)"
           @update-cart-quantity="updateCartQuantity"
+          @show-cart-or-buy="toggleCartModal"
         />
       </div>
     </div>
+    <Transition>
+      <CartModal @close="toggleCartModal" v-if="showModal" />
+    </Transition>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
 import Card from "../components/Card.vue";
+import CartModal from "../components/CartModal.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
@@ -56,11 +61,13 @@ export default {
   data() {
     return {
       cartQuantity: 0,
+      showModal: false,
     };
   },
   components: {
     Header,
     Card,
+    CartModal,
   },
   computed: {
     ...mapState({
@@ -78,6 +85,9 @@ export default {
         localStorage.getItem("cartProductList")
       ).length;
     },
+    toggleCartModal() {
+      this.showModal = !this.showModal;
+    },
   },
   created() {
     this.getProductList();
@@ -89,5 +99,15 @@ export default {
 <style scoped>
 input:focus {
   outline: none;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

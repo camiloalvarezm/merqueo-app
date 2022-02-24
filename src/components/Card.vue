@@ -1,7 +1,7 @@
 <template>
   <div class="rounded w-full bg-white flex flex-col justify-between pt-10">
     <div class="flex justify-center">
-      <img :src="productData.image_medium_url" alt="img" class="rounded h-64" />
+      <img :src="productData.image_medium_url" alt="img" class="rounded h-64 transition delay-150 duration-300 ease-in-out" />
     </div>
     <div class="m-10 font-bold divide-y">
       <div class="flex flex-col gap-y-3 mb-3">
@@ -44,7 +44,7 @@
             +
           </button>
         </div>
-        <button class="rounded bg-darkpink py-2 font-bold text-white">
+        <button class="rounded bg-darkpink py-2 font-bold text-white" @click="showCartOrBuy">
           <i
             :class="{
               'fa-solid fa-bag-shopping': !added,
@@ -107,6 +107,9 @@ export default {
         this.added = true;
       }
     },
+    showCartOrBuy() {
+      this.$emit('showCartOrBuy')
+    }
   },
 };
 </script>

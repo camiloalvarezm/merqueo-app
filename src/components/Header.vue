@@ -16,10 +16,11 @@
         <img
           src="../assets/img/merqueo-logo.png"
           alt="m-logo"
-          class="h-12 lg:h-14"
+          class="h-12 lg:h-14 cursor-pointer"
+          @click="goToHome"
         />
       </div>
-      <div class="flex cursor-pointer">
+      <div class="flex cursor-pointer" @click="showCartModal">
         <div>
           <i class="fa-solid fa-cart-shopping text-3xl"></i>
         </div>
@@ -40,6 +41,14 @@ export default {
     cartQuantity: {
       required: true,
       type: Number
+    }
+  },
+  methods: {
+    goToHome() {
+      this.$router.push('/')
+    },
+    showCartModal() {
+      this.$emit('openModal')
     }
   }
 };
