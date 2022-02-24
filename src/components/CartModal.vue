@@ -25,48 +25,62 @@
         pt-0
         md:w-full md:mx-28
         lg:w-1/2
+        min-height
+        flex flex-col
+        justify-between
       "
     >
-      <div class="text-right sticky top-0 bg-white">
+      <div class="text-right sticky top-0 bg-white border-b-4 pb-3">
         <i
           class="fa-solid fa-circle-xmark text-3xl cursor-pointer pt-2"
           @click="close"
         ></i>
+        <h1 class="font-bold text-3xl text-center">Tu carrito</h1>
       </div>
-      <CartItem />
-      <CartItem />
-      <CartItem />
-      <div
-        class="
-          bg-white
-          sticky
-          bottom-0
-          flex flex-col
-          py-3
-          gap-3
-          md:flex-row md:justify-evenly
-          md:py-5
-        "
-      >
-        <button
-          class="rounded bg-darkpink py-2 w-full md:w-2/5 font-bold text-white"
-        >
-          <i class="fa-solid fa-bag-shopping mr-2"></i>Comprar carrito
-        </button>
-        <button
-          class="
-            rounded
-            bg-lightpink
-            py-2
-            w-full
-            md:w-2/5
-            font-bold
-            text-darkpink
-          "
-          @click="close"
-        >
-          Cerrar
-        </button>
+      <div v-if="cartItems.length < 1" class="flex flex-col">
+        <i class="fa-solid fa-face-frown text-3xl"></i>
+        <span class="font-bold text-lg">No hay productos en el carrito.</span>
+      </div>
+      <CartItem
+        v-for="(product, index) in cartItems"
+        :key="index"
+        :itemData="product"
+        @reload-cart="reloadCart"
+      />
+      <div class="bg-white sticky bottom-0 py-3 flex flex-col gap-3">
+        <div class="border-t-4 pt-3" v-if="cartItems.length > 0">
+          <span class="text-3xl font-bold">Total: ${{ totalPrice }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:justify-evenly md:py-5 gap-3">
+          <button
+            class="
+              rounded
+              bg-darkpink
+              py-2
+              w-full
+              md:w-2/5
+              font-bold
+              text-white
+            "
+            v-if="cartItems.length > 0"
+          >
+            <i class="fa-solid fa-bag-shopping mr-2"></i>Comprar carrito
+          </button>
+          <button
+            class="
+              rounded
+              bg-lightpink
+              py-2
+              w-full
+              md:w-2/5
+              font-bold
+              text-darkpink
+            "
+            @click="close"
+          >
+            Cerrar
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -74,18 +88,43 @@
 
 <script>
 import CartItem from "../components/CartItem.vue";
+
 export default {
   name: "CartModal",
   components: {
     CartItem,
   },
+  data() {
+    return {
+      cartItems: [],
+    };
+  },
+  computed: {
+    totalPrice() {
+      let total = 0;
+      for (let item of this.cartItems) {
+        console.log(item)
+        total += item.quantity * item.price;
+      }
+      return total;
+    },
+  },
   methods: {
     close() {
       this.$emit("close");
     },
+    reloadCart() {
+      this.cartItems = JSON.parse(localStorage.getItem("cartProductList"));
+    },
+  },
+  created() {
+    this.reloadCart();
   },
 };
 </script>
 
-<style>
+<style scoped>
+.min-height {
+  min-height: 500px;
+}
 </style>

@@ -1,7 +1,11 @@
 <template>
   <div class="rounded w-full bg-white flex flex-col justify-between pt-10">
     <div class="flex justify-center">
-      <img :src="productData.image_medium_url" alt="img" class="rounded h-64 transition delay-150 duration-300 ease-in-out" />
+      <img
+        :src="productData.image_medium_url"
+        alt="img"
+        class="rounded h-64 transition delay-150 duration-300 ease-in-out"
+      />
     </div>
     <div class="m-10 font-bold divide-y">
       <div class="flex flex-col gap-y-3 mb-3">
@@ -44,7 +48,10 @@
             +
           </button>
         </div>
-        <button class="rounded bg-darkpink py-2 font-bold text-white" @click="showCartOrBuy">
+        <button
+          class="rounded bg-darkpink py-2 font-bold text-white"
+          @click="showCartOrBuy"
+        >
           <i
             :class="{
               'fa-solid fa-bag-shopping': !added,
@@ -73,6 +80,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "Card",
   data() {
@@ -92,6 +100,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['updateCartQuantity']),
     addOrRemoveQuantity(action) {
       if (action === "add" && this.productQuantity < this.productData.quantity)
         this.productQuantity++;
@@ -101,15 +110,21 @@ export default {
     addToCart() {
       const cartList = JSON.parse(localStorage.getItem("cartProductList"));
       if (cartList) {
-        cartList.push({ id: this.productId, quantity: this.productQuantity });
+        cartList.push({
+          id: this.productId,
+          quantity: this.productQuantity,
+          name: this.productData.name,
+          imgUrl: this.productData.image_medium_url,
+          price: this.productData.price,
+        });
+        this.updateCartQuantity(cartList.length)
         localStorage.setItem("cartProductList", JSON.stringify(cartList));
-        this.$emit("updateCartQuantity");
         this.added = true;
       }
     },
     showCartOrBuy() {
-      this.$emit('showCartOrBuy')
-    }
+      this.$emit("showCartOrBuy");
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen overflow-y-scroll">
-    <Header :cartQuantity="cartQuantity" @open-modal="toggleCartModal" />
+    <Header @open-modal="toggleCartModal" />
     <div class="max-w-screen-xl mx-auto mt-6 px-6 md:px-12">
       <div
         class="
@@ -39,7 +39,6 @@
           :key="index"
           :product-data="product.attributes"
           :product-id="Number(product.id)"
-          @update-cart-quantity="updateCartQuantity"
           @show-cart-or-buy="toggleCartModal"
         />
       </div>
@@ -60,7 +59,6 @@ export default {
   name: "Home",
   data() {
     return {
-      cartQuantity: 0,
       showModal: false,
     };
   },
@@ -80,18 +78,12 @@ export default {
     searchProduct() {
       // return this.filterProducts(value)
     },
-    updateCartQuantity() {
-      this.cartQuantity = JSON.parse(
-        localStorage.getItem("cartProductList")
-      ).length;
-    },
     toggleCartModal() {
       this.showModal = !this.showModal;
     },
   },
   created() {
     this.getProductList();
-    this.updateCartQuantity();
   },
 };
 </script>

@@ -29,28 +29,32 @@
             {{ cartQuantity }}
           </h6>
         </div>
+        <span class="self-center text-xl font-bold ml-2"
+          >Total $ {{ totalPrice }}</span
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Header",
-  props: {
-    cartQuantity: {
-      required: true,
-      type: Number
-    }
+  computed: {
+    ...mapState({
+      cartQuantity: (state) => state.cartQuantity,
+      totalPrice: (state) => state.totalPrice,
+    }),
   },
   methods: {
     goToHome() {
-      this.$router.push('/')
+      this.$router.push("/");
     },
     showCartModal() {
-      this.$emit('openModal')
-    }
-  }
+      this.$emit("openModal");
+    },
+  },
 };
 </script>
 

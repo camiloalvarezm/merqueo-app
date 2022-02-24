@@ -5,12 +5,20 @@ import axios from 'axios'
 
 export default createStore({
   state: {
-    productList: []
+    productList: [],
+    cartQuantity: 0,
+    totalPrice: 0,
   },
   mutations: {
     updateProductList(state, payload) {
       state.productList = payload
-    }
+    },
+    updateCartQuantity(state, payload) {
+      state.cartQuantity = payload
+    },
+    updateTotalPrice(state, payload) {
+      state.totalPrice = payload
+    },
   },
   actions: {
     getProductList({
