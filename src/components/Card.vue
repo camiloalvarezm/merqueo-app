@@ -76,7 +76,7 @@
           <i class="fa-solid fa-circle-check mr-2"></i>¡Añadido al carrito!
         </button>
         <button
-          class="rounded bg-yellow py-2 font-bold cursor-default"
+          class="rounded bg-yellow p-2 font-bold cursor-default text-sm"
           v-if="existProduct"
         >
           <i class="fa-solid fa-triangle-exclamation mr-2"></i>¡El producto ya está en tu carrito!
