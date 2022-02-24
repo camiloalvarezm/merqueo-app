@@ -53,18 +53,13 @@
         </div>
         <div class="flex flex-col md:flex-row md:justify-evenly md:py-5 gap-3">
           <button
-            class="
-              rounded
-              bg-darkpink
-              py-2
-              w-full
-              md:w-2/5
-              font-bold
-              text-white
-            "
+            class="rounded py-2 w-full md:w-2/5 font-bold text-white"
+            :class="{ 'bg-darkpink': !bought, 'bg-darkgreen': bought }"
             v-if="cartItems.length > 0"
+            @click="buy"
           >
-            <i class="fa-solid fa-bag-shopping mr-2"></i>Comprar carrito
+            <i class=" mr-2" :class="{'fa-solid fa-bag-shopping': !bought, 'fa-solid fa-face-smile-wink': bought }"></i
+            >{{ bought ? "¡Estamos procesando tu compra!" : "Comprar carrito" }}
           </button>
           <button
             class="
@@ -97,13 +92,14 @@ export default {
   data() {
     return {
       cartItems: [],
+      bought: false,
     };
   },
   computed: {
     totalPrice() {
       let total = 0;
       for (let item of this.cartItems) {
-        console.log(item)
+        console.log(item);
         total += item.quantity * item.price;
       }
       return total;
@@ -115,6 +111,9 @@ export default {
     },
     reloadCart() {
       this.cartItems = JSON.parse(localStorage.getItem("cartProductList"));
+    },
+    buy() {
+      this.bought = true;
     },
   },
   created() {

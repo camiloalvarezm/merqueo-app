@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen overflow-y-scroll">
+  <div class="h-screen overflow-y-scroll" :key="showModal">
     <Header @open-modal="toggleCartModal" />
     <div class="max-w-screen-xl mx-auto mt-6 px-6 md:px-12">
       <div

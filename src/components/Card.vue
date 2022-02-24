@@ -11,6 +11,7 @@
       <div class="flex flex-col gap-y-3 mb-3">
         <span class="text-xl">{{ productData.name }}</span>
         <span class="text-lg">$ {{ productData.price }}</span>
+        <span class="font-normal text-sm">{{ productData.pum[0] }}</span>
       </div>
       <div class="flex flex-col gap-y-3 pt-3">
         <div class="flex justify-evenly mb-2">
@@ -118,7 +119,7 @@ export default {
           price: this.productData.price,
         });
         this.updateCartQuantity(cartList.length);
-        this.updateTotalPrice(cartList)
+        this.updateTotalPrice(cartList);
         localStorage.setItem("cartProductList", JSON.stringify(cartList));
         this.added = true;
       }
