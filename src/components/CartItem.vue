@@ -39,13 +39,14 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["updateCartQuantity"]),
+    ...mapMutations(["updateCartQuantity", "updateTotalPrice"]),
     removeItem(id) {
       const items = JSON.parse(localStorage.getItem("cartProductList"));
       const newItems = items.filter((value) => {
         return value.id !== id;
       });
       this.updateCartQuantity(newItems.length);
+      this.updateTotalPrice(newItems)
       localStorage.setItem("cartProductList", JSON.stringify(newItems));
       this.$emit("reloadCart");
     },

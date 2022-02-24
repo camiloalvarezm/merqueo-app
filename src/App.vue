@@ -14,11 +14,7 @@ export default {
     } else {
       const items = JSON.parse(localStorage.getItem("cartProductList"));
       this.updateCartQuantity(items.length);
-      let totalPrice = 0;
-      for (let item of items) {
-        totalPrice += item.quantity * item.price;
-      }
-      this.updateTotalPrice(totalPrice);
+      this.updateTotalPrice(items);
     }
   },
 };

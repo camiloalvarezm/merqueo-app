@@ -100,7 +100,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['updateCartQuantity']),
+    ...mapMutations(["updateCartQuantity", "updateTotalPrice"]),
     addOrRemoveQuantity(action) {
       if (action === "add" && this.productQuantity < this.productData.quantity)
         this.productQuantity++;
@@ -117,7 +117,8 @@ export default {
           imgUrl: this.productData.image_medium_url,
           price: this.productData.price,
         });
-        this.updateCartQuantity(cartList.length)
+        this.updateCartQuantity(cartList.length);
+        this.updateTotalPrice(cartList)
         localStorage.setItem("cartProductList", JSON.stringify(cartList));
         this.added = true;
       }

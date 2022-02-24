@@ -17,7 +17,11 @@ export default createStore({
       state.cartQuantity = payload
     },
     updateTotalPrice(state, payload) {
-      state.totalPrice = payload
+      let totalPrice = 0
+      for (let item of payload) {
+        totalPrice += item.quantity * item.price
+      }
+      state.totalPrice = totalPrice
     },
   },
   actions: {
