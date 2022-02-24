@@ -99,7 +99,6 @@ export default {
     totalPrice() {
       let total = 0;
       for (let item of this.cartItems) {
-        console.log(item);
         total += item.quantity * item.price;
       }
       return total;

@@ -32,7 +32,6 @@ export default createStore({
         .get('https://run.mocky.io/v3/729fdd53-f365-49b4-bd55-f7e10bcc9a4b')
         .then((response) => {
           const { data } = response.data
-          console.log(data[1])
           commit('updateProductList', data)
         })
         .catch((e) => {
@@ -41,9 +40,9 @@ export default createStore({
     }
   },
   getters: {
-    filterProducts({ productList }, payload) {
-      console.log(productList, payload)
-    }
+    // filterProducts({ productList }, payload) {
+    //   console.log(productList, payload)
+    // }
   },
   modules: {}
 })

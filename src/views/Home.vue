@@ -76,6 +76,7 @@ export default {
   methods: {
     ...mapActions(["getProductList"]),
     searchProduct() {
+      alert('funcionalidad en desarrollo')
       // return this.filterProducts(value)
     },
     toggleCartModal() {

@@ -65,7 +65,7 @@
         <button
           class="rounded bg-lightpink py-2 font-bold text-darkpink"
           @click="addToCart"
-          v-if="!added"
+          v-if="!added && !existProduct"
         >
           <i class="fa-solid fa-cart-shopping mr-2"></i>Añadir al carrito
         </button>
@@ -74,6 +74,12 @@
           v-if="added"
         >
           <i class="fa-solid fa-circle-check mr-2"></i>¡Añadido al carrito!
+        </button>
+        <button
+          class="rounded bg-yellow py-2 font-bold cursor-default"
+          v-if="existProduct"
+        >
+          <i class="fa-solid fa-triangle-exclamation mr-2"></i>¡El producto ya está en tu carrito!
         </button>
       </div>
     </div>
@@ -88,6 +94,7 @@ export default {
     return {
       productQuantity: 1,
       added: false,
+      existProduct: false,
     };
   },
   props: {
@@ -110,6 +117,10 @@ export default {
     },
     addToCart() {
       const cartList = JSON.parse(localStorage.getItem("cartProductList"));
+      if (cartList.find((value) => value.id === this.productId)) {
+        this.existProduct = true;
+        return;
+      }
       if (cartList) {
         cartList.push({
           id: this.productId,
@@ -125,6 +136,7 @@ export default {
       }
     },
     showCartOrBuy() {
+      this.addToCart();
       this.$emit("showCartOrBuy");
     },
   },
